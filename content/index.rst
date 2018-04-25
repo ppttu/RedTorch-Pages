@@ -3,9 +3,9 @@
 :date: 20180424
 :summary: Chinese index.html
 
-
 RedTorch
 ^^^^^^^^
+
 
 `转到github仓库 <https://github.com/sun0x00/redtorch/>`_
 
@@ -55,8 +55,6 @@ RedTorch
 
 + 支持策略多账户（审慎使用，严禁违规操作）
 
-+ 支持war直接启动，一次打包同时兼容Linux和Windows
-
 项目结构
 ---------
 
@@ -78,7 +76,7 @@ RedTorch
 
 + 接口（Gateway）一般是指 带有事件推送的行情/交易接口，目前本项目仅实现了上期技术的CTP接口。如果有其他需要，可以参考CTP接口加入其他行情交易接口，未来可能优先考虑加入飞创接口。
 
-  P.s. CTP接口采用Swig封装，具体封装过程会作为单独的项目发布，相关源码和方法陆续整理释放，目前时间安排过于紧张。由于JNA对底层字符编码转换不可逆转，因此在编译时对CTP的用到的相关中文接口进行了批量转码处理。
+  P.s. CTP接口采用Swig封装，已作为单独项目发布，详见底部FAQ。由于JNI对底层字符编码转换不可逆转，因此在编译时对CTP的用到的相关中文接口进行了批量转码处理。
 
 + 模块（Module）依赖主引擎，间接依赖事件引擎,数据引擎。ZEUS策略引擎（ZeusEngine）也是一个模块（Module）。ZEUS引擎的接口有两个实现，分别为实盘和回测。回测不需要启动SpringBoot，仅需要Java main方法直接启动。
 
@@ -95,16 +93,16 @@ RedTorch
 
 + 使用Python将行情数据导入MongoDB的模版已经完成，但尚未整理发布。
 
-+ windows和linux CTP编译源码已经就绪，近期发布
++ 部分linux不能直接使用编译后的动态链接库，访问 `RedTorch-Resources <https://github.com/sun0x00/RedTorch-Resources>`_ 自行下载编译
 
 预览环境准备
 --------------------
 
 + 安装MongoDB
 
-+ 安装vs2013x64运行库 、 vs2015x64运行库
++ 安装vs2013x64运行库 、 vs2015x64运行库（Linux跳过）
 
-+ 安装JDK8+x64并设置环境变量，最低要求JDK8，JDK9 JDK10尚未测试
++ 安装JDK8+x64并设置环境变量（JAVA_HOME,PATH必须），最低要求JDK8，JDK9 JDK10尚未测试
 
 + IDE推荐使用最新版Eclipse IDE for Java EE Developers x64
 
@@ -144,7 +142,13 @@ FAQ
 + 如何运行回测（请等待简要文档发布）
 
 
++ CTP封装源码在哪里
+
+    访问 `RedTorch-Resources <https://github.com/sun0x00/RedTorch-Resources>`_
+	
+	
 `转到github仓库 <https://github.com/sun0x00/redtorch/>`_
+	
 
 联系作者
 --------------
