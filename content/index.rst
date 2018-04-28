@@ -64,7 +64,7 @@ RedTorch
 
     - 项目已经弃用早期采用的观察者模式，不再使用阻塞队列（LinkedBlockingQueue）
     
-    - 使用 `LMAX Disruptor <http://www.vnpy.org/>`_ 重新设计了高速事件引擎（FastEventEngine），并加入性能调节配置
+    - 使用 `LMAX Disruptor <https://github.com/LMAX-Exchange/disruptor/>`_ 重新设计了高速事件引擎（FastEventEngine），并加入性能调节配置
     
     - 性能仍然需要通过多核CPU体现
     
@@ -134,6 +134,9 @@ RedTorch
     
 + 一切就绪后运行ZeusApplication,访问链接:http://IP:9099/static/html/index.html,一般是:http://localhost:9099/static/html/index.html
 
+
+`转到github仓库 <https://github.com/sun0x00/redtorch/>`_
+
 FAQ
 ------
 + 策略如何配置
@@ -147,13 +150,6 @@ FAQ
 + CTP封装源码在哪里
 
     访问 `RedTorch-Resources <https://github.com/sun0x00/RedTorch-Resources>`_
-	
-
-
-
-`转到github仓库 <https://github.com/sun0x00/redtorch/>`_
-
-	
 
 联系作者
 --------------
