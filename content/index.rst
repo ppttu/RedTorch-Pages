@@ -6,9 +6,12 @@
 RedTorch
 ^^^^^^^^
 
-
-`转到github仓库 <https://github.com/sun0x00/redtorch/>`_
-
+.. image:: https://github.com/sun0x00/RedTorch-Pages/raw/master/docs/images/RtSnapshort0x00.png
+   :height: 992px
+   :width: 1929px
+   :scale: 50 %
+   :alt: alternate text
+   :align: right
 
 简介
 -----
@@ -133,9 +136,6 @@ RedTorch
 + 如果部署在windows中，需要使用用户临时目录
     
 + 一切就绪后运行ZeusApplication,访问链接:http://IP:9099/static/html/index.html,一般是:http://localhost:9099/static/html/index.html
-
-
-`转到github仓库 <https://github.com/sun0x00/redtorch/>`_
 
 FAQ
 ------
