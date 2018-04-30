@@ -13,6 +13,8 @@ RedTorch
    :alt: alternate text
    :align: right
 
+`转到github仓库 <https://github.com/sun0x00/redtorch/>`_
+   
 简介
 -----
 
@@ -151,6 +153,8 @@ FAQ
 
     访问 `RedTorch-Resources <https://github.com/sun0x00/RedTorch-Resources>`_
 
+`转到github仓库 <https://github.com/sun0x00/redtorch/>`_
+	
 联系作者
 --------------
 sun0x00@gmail.com
