@@ -34,7 +34,7 @@
 </footer><!-- /.post-info --><div class="section" id="redtorch">
 <h2>RedTorch</h2>
 <img alt="alternate text" class="align-right" src="https://github.com/sun0x00/RedTorch-Pages/raw/master/docs/images/RtSnapshort0x00.png" style="width: 964.5px; height: 496.0px;" />
-<p><a class="reference external" href="https://github.com/sun0x00/redtorch/">转到github仓库</a></p>
+<p><a class="reference external" href="https://github.com/sun0x00/redtorch/">转到github仓库下载</a></p>
 <div class="section" id="id1">
 <h3>简介</h3>
 <p>项目是基于Java语言开发的开源量化交易程序开发框架，主要架构思想来自开源项目 <a class="reference external" href="http://www.vnpy.org/">vn.py</a>，其中大约有60%的逻辑是直接移植过来的，因此在这里首先向vn.py项目作者致谢。</p>
@@ -42,7 +42,7 @@
 <p>使用Java重构的原因主要有以下几点：</p>
 <ul class="simple">
 <li>Python GIL带来的性能问题难以突破，不能有效使用多核CPU。对于绝大部分策略可能对实盘T2T延迟并没有太高的要求，使用vn.py便捷可靠，但当策略回测时需要使用Tick级别或多合约回测，控制性能问题带来的时间成本就显得格外重要。</li>
-<li>作为便捷的动态语言，原生Python没有编译期检查，但这是一把双刃剑,虽然Java也有令人诟病的 NullPointerException，但还是可以暴露一些潜在的问题。</li>
+<li>作为便捷的动态语言，Python在数据分析等领域有着天生的优势，但&quot;动态语言一时爽，生产Bug火葬场&quot;，原生Python没有编译期检查，这是一把双刃剑。个人亲历了一次因为官方解释器None与0比较不报异常，且None无限小的问题，导致交易中30秒亏损数万元。虽然Java也有令人诟病的 NullPointerException，但还是可以暴露一些潜在的问题。</li>
 <li>曾考虑使用C++，但因工作量太大只能作罢，而且已有此类工具。得益于JVM的良好设计，框架在多核利用和内部T2T延迟方面表现良好，绝大部分时候内部T2T延迟控制在70μs~200μs，而vn.py创始前辈对vn.py早期的T2T测试结果大概24ms,这只是vnpy早期数据，现在应该更快了。</li>
 </ul>
 </div>
@@ -71,7 +71,7 @@
 <div class="section" id="id5">
 <h3>项目结构</h3>
 <ul>
-<li><p class="first">项目使用Maven构建</p>
+<li><p class="first">项目使用Gradle构建</p>
 </li>
 <li><p class="first">框架采用事件驱动架构,且利用多核。</p>
 <blockquote>
@@ -120,9 +120,9 @@
 </li>
 <li><p class="first">IDE推荐使用最新版Eclipse IDE for Java EE Developers x64</p>
 </li>
-<li><p class="first">安装Maven3.x(可选，也可以使用Eclipse嵌入式)</p>
+<li><p class="first">安装Gradle</p>
 </li>
-<li><p class="first">使Git克隆本项目或直接下载zip，在Eclipse中使用File-&gt;Import-&gt;Existing Maven Projects导入本项目</p>
+<li><p class="first">使Git克隆本项目或直接下载zip，在Eclipse中使用File-&gt;Import-&gt;Existing Gradle Projects导入本项目</p>
 </li>
 <li><p class="first">修改application.properties文件</p>
 <blockquote>
@@ -149,6 +149,7 @@
 <li><p class="first">一切就绪后运行ZeusApplication,访问链接:<a class="reference external" href="http://IP:9099/static/html/index.html">http://IP:9099/static/html/index.html</a>,一般是:<a class="reference external" href="http://localhost:9099/static/html/index.html">http://localhost:9099/static/html/index.html</a></p>
 </li>
 </ul>
+<p><a class="reference external" href="https://github.com/sun0x00/redtorch/">转到github仓库下载</a></p>
 </div>
 <div class="section" id="faq">
 <h3>FAQ</h3>
@@ -166,7 +167,6 @@
 </blockquote>
 </li>
 </ul>
-<p><a class="reference external" href="https://github.com/sun0x00/redtorch/">转到github仓库</a></p>
 </div>
 <div class="section" id="id11">
 <h3>联系作者</h3>
