@@ -30,6 +30,10 @@
         <abbr class="published" title="2018-04-24T00:00:00+08:00">
                 Published: 2018 04 24
         </abbr>
+		<br />
+        <abbr class="modified" title="2018-08-02T00:00:00+08:00">
+                Updated: 2018 08 02
+        </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/sun0x00.html">sun0x00</a>
@@ -38,26 +42,26 @@
 
 </footer><!-- /.post-info -->      <div class="section" id="redtorch">
 <h2>RedTorch</h2>
-<img alt="alternate text" class="align-right" src="https://github.com/sun0x00/RedTorch-Pages/raw/master/docs/images/RtSnapshort0x00.png" style="width: 964.5px; height: 496.0px;" />
+<img alt="alternate text" class="align-center" src="https://github.com/sun0x00/RedTorch-Pages/raw/master/docs/images/RtSnapshort0x00.png" style="width: 964.5px; height: 496.0px;" />
 <p><a class="reference external" href="https://github.com/sun0x00/redtorch/">转到github仓库下载</a></p>
 <div class="section" id="id1">
 <h3>简介</h3>
 <p>项目是基于Java语言开发的开源量化交易程序开发框架，主要架构思想来自开源项目 <a class="reference external" href="http://www.vnpy.org/">vn.py</a>，其中大约有60%的逻辑是直接移植过来的，因此在这里首先向vn.py项目作者致谢。</p>
 <p>本框架需要有Java语言使用经验，因此Java编程经验少于两年的朋友请审慎使用，建议移步 <a class="reference external" href="http://www.vnpy.org/">vn.py</a>，Python语言的学习成本要远低于Java。</p>
-<p>使用Java重构的原因主要有以下几点：</p>
+<p>使用Java重构的主要原因：</p>
 <ul class="simple">
 <li>Python GIL带来的性能问题难以突破，不能有效使用多核CPU。对于绝大部分策略可能对实盘T2T延迟并没有太高的要求，使用vn.py便捷可靠，但当策略回测时需要使用Tick级别或多合约回测，控制性能问题带来的时间成本就显得格外重要。</li>
-<li>作为便捷的动态语言，Python在数据分析等领域有着天生的优势，但&quot;动态语言一时爽，生产Bug火葬场&quot;，原生Python没有编译期检查，这是一把双刃剑。个人亲历了一次因为官方解释器None与0比较不报异常，且None无限小的问题，导致交易中30秒亏损数万元。虽然Java也有令人诟病的 NullPointerException，但还是可以暴露一些潜在的问题。</li>
-<li>曾考虑使用C++，但因工作量太大只能作罢，而且已有此类工具。得益于JVM的良好设计，框架在多核利用和内部T2T延迟方面表现良好，绝大部分时候内部T2T延迟控制在70μs~200μs，而vn.py创始前辈对vn.py早期的T2T测试结果大概24ms,这只是vnpy早期数据，现在应该更快了。</li>
+<li>作为便捷的动态语言，Python在数据分析等领域有着天生的优势，但&quot;动态语言一时爽，生产Bug火葬场&quot;，原生Python没有编译期检查，这是一把双刃剑。个人亲历了一次因官方解释器None与0比较不报异常，且None无限小的问题，导致交易中30秒亏损数万元。虽然Java也有令人诟病的 NullPointerException，但还是可以暴露一些潜在的问题。</li>
+<li>曾考虑使用C++，但因工作量太大只能作罢，且已有大量此类开源工具。得益于JVM的良好设计，框架在多核利用和内部T2T延迟方面表现良好，绝大部分时候内部T2T延迟控制在70μs~200μs。vn.py创始前辈对vn.py早期的T2T测试结果是ms级别（这只是vnpy早期数据，现在应该更快了）。</li>
 </ul>
 </div>
 <div class="section" id="id3">
 <h3>重要提示</h3>
 <ul class="simple">
-<li>项目尚处于开发预览阶段，测试覆盖率不足50%，因此使用前请务必严格测试。</li>
-<li>强烈建议watch本项目，任何问题的最新修正都会在第一时间发布。</li>
-<li>预计第一个Relase版本将在7月下旬发布（股票已经清盘，可以专注一些，跳票几率小了^_^）。</li>
+<li>项目尚处于开发预览阶段，测试覆盖率不足，因此使用前请务必严格测试。</li>
+<li>强烈建议watch或star本项目，任何问题的最新修正都会在第一时间发布。</li>
 <li>从决定移植到本项目第一次发布，大概用了20个工作日，时间仓促，难免有错误之处，还望不吝赐教随手指正，相关问题请发issues，在此先表示感谢。</li>
+<li>欢迎发起 Pull Request</li>
 <li>永久免费开源，但请遵循协议。</li>
 </ul>
 </div>
@@ -76,45 +80,45 @@
 <div class="section" id="id5">
 <h3>项目结构</h3>
 <ul>
-<li><p class="first">项目使用Gradle构建</p>
+<li><p class="first">项目使用Gradle构建，并做了适当的拆分</p>
+<blockquote>
+<ul class="simple">
+<li><strong>rt-core</strong> 核心模块，包含了核心引擎，高速事件引擎，Zeus实盘交易引擎，Zeus回测引擎，以及相关的数据服务。相关服务实例使用Spring框架托管。</li>
+<li><strong>rt-api-jctp</strong> Swig封装官方CTP的API模块，由于JNI对底层字符编码转换不可逆转，因此在编译时对CTP的用到的相关中文接口进行了批量转码处理，相关的C++代码已作为单独项目发布，详见底部FAQ。</li>
+<li><strong>rt-gateway-jctp</strong> 适配rt-api-jctp的接口模块，实现了rt-core中的Gateway接口。</li>
+<li><strong>rt-front-web</strong> Spring Boot承载的Web模块，暴露HTTP接口，提供SPA页面静态资源访问。</li>
+<li><strong>rt-common</strong> 通用模块</li>
+<li><strong>rt-strategy</strong> 策略模块，提供了策略示例以及回测示例。请注意，回测需要在test环境中进行。</li>
+</ul>
+</blockquote>
 </li>
 <li><p class="first">框架采用事件驱动架构,且利用多核。</p>
 <blockquote>
 <ul class="simple">
 <li>项目已经弃用早期采用的观察者模式，不再使用阻塞队列（LinkedBlockingQueue）</li>
-<li>使用 <a class="reference external" href="https://github.com/LMAX-Exchange/disruptor/">LMAX Disruptor</a> 重新设计了高速事件引擎（FastEventEngine），并加入性能调节配置</li>
-<li>性能仍然需要通过多核CPU体现</li>
+<li>使用 <a class="reference external" href="https://github.com/LMAX-Exchange/disruptor/">LMAX Disruptor</a> 重新设计了高速事件引擎（FastEventEngineService），并加入性能调节配置</li>
+<li>请注意,性能仍然需要通过多核CPU体现</li>
 </ul>
 </blockquote>
 </li>
-<li><p class="first">Web界面部分采用SPA架构，使用VUE编写，数据交换采用HTTP被动获取和SocketIO主动推送两种方式结合。Web的承载核心框架为Spring Boot，但是主引擎（MainEngine）、ZEUS策略引擎（ZeusEngine）、行情/交易接口实现（Gateway）等交易相关的都不依赖Spring Boot。因此Web部分可轻松剥离，不过值得一提的是，在多线程下，Web部分对交易部分的性能影响完全可以忽略不计，而且提供了一个应急操纵的交互接口。</p>
-</li>
-<li><p class="first">事件引擎（EventEngine）是整个交易框架的核心之一，是其他引擎、接口之间的事件媒介。</p>
-</li>
-<li><p class="first">数据引擎（DataEngine）管理与数据库之间的连接，目前区分了行情数据库和默认库，为满足多人使用同一个行情数据库提供了基础，也可以通过修改配置ClientID兼容同一个数据库实例下使用多个平台实例。</p>
-</li>
-<li><p class="first">主引擎（MainEngine）负责管理数据引擎(DataEngine), 接口（Gateway）,模块（Module），对外暴露管理API，依赖事件引擎</p>
-</li>
-<li><p class="first">接口（Gateway）一般是指 带有事件推送的行情/交易接口，目前本项目仅实现了上期技术的CTP接口。如果有其他需要，可以参考CTP接口加入其他行情交易接口，未来可能优先考虑加入飞创接口。</p>
-<p>P.s. CTP接口采用Swig封装，已作为单独项目发布，详见底部FAQ。由于JNI对底层字符编码转换不可逆转，因此在编译时对CTP的用到的相关中文接口进行了批量转码处理。</p>
-</li>
-<li><p class="first">模块（Module）依赖主引擎，间接依赖事件引擎,数据引擎。ZEUS策略引擎（ZeusEngine）也是一个模块（Module）。ZEUS引擎的接口有两个实现，分别为实盘和回测。回测不需要启动SpringBoot，仅需要Java main方法直接启动。</p>
+<li><p class="first">Web界面部分采用SPA架构，使用VUE编写，数据交换采用HTTP被动获取和SocketIO主动推送两种方式结合。承载Web的核心框架为Spring Boot，得益于Java对多核CPU的优化，Web部分对交易部分的性能影响完全可以忽略不计，而且提供了一个便利的应急操纵的交互接口。</p>
 </li>
 </ul>
 </div>
 <div class="section" id="id6">
 <h3>项目文档</h3>
-<p>还在写，文档没有deadline，文档deadline不可能有的，这辈子不可能有deadline。不过第一个Relase版本发布时会提供一个简要的文档，后续会组织补充。</p>
+<p>还在写，文档没有deadline，文档deadline不可能有的，这辈子不可能有deadline。</p>
+<p>先看一下这个 <a class="reference external" href="https://v.youku.com/v_show/id_XMzc1ODY5OTk2NA==.html?spm=a2h3j.8428770.3416059.1">概要视频(注意选择分辨率)</a> 吧。</p>
 </div>
-<div class="section" id="id7">
+<div class="section" id="id8">
 <h3>项目已知问题</h3>
 <ul class="simple">
-<li>分段回测、多合约回测已经实现，各合约回测结果已经写入csv文件，但尚未进行结果汇总，回测绘图等功能正在开发，第一个Relase版本前将会提供。</li>
+<li>分段回测、多合约回测已经实现，各合约回测结果已经写入csv文件，但尚未进行结果汇总，回测绘图等功能正在开发。</li>
 <li>使用Python将行情数据导入MongoDB的模版已经完成，但尚未整理发布。</li>
 <li>部分linux不能直接使用编译后的动态链接库，访问 <a class="reference external" href="https://github.com/sun0x00/RedTorch-Resources">RedTorch-Resources</a> 自行下载编译</li>
 </ul>
 </div>
-<div class="section" id="id8">
+<div class="section" id="id9">
 <h3>预览环境准备</h3>
 <ul>
 <li><p class="first">安装MongoDB</p>
@@ -125,7 +129,7 @@
 </li>
 <li><p class="first">IDE推荐使用最新版Eclipse IDE for Java EE Developers x64</p>
 </li>
-<li><p class="first">安装Gradle</p>
+<li><p class="first">安装Gradle(可选,最新版Eclipse已经集成)</p>
 </li>
 <li><p class="first">使Git克隆本项目或直接下载zip，在Eclipse中使用File-&gt;Import-&gt;Existing Gradle Projects导入本项目</p>
 </li>
@@ -139,11 +143,11 @@
 <li><p class="first">修改RtConfig.properties</p>
 <blockquote>
 <ul class="simple">
-<li>配置ClientID(如果多人共享使用ClientDB)</li>
+<li>配置ClientDB修改rt-core</li>
 <li>配置Web认证口令（默认test test）</li>
 <li>配置数据库(用户名密码等可选,行情和ClientDB可以使用同一个MongoDB实例)</li>
 <li>日志路径（默认D:\log，不存在请创建）</li>
-<li>ZEUS引擎缓存路径（module.zeus.backtesting.output.dir默认D:\redtorch_zeus_backtesting_output，不存在请创建）</li>
+<li>ZEUS引擎缓存路径（module.zeus.backtesting.output.dir默认D:\redtorch_zeus_backtesting_output，不存在请创建或修改配置）</li>
 </ul>
 </blockquote>
 </li>
@@ -151,7 +155,7 @@
 </li>
 <li><p class="first">如果部署在windows中，需要使用用户临时目录</p>
 </li>
-<li><p class="first">一切就绪后运行ZeusApplication,访问链接:<a class="reference external" href="http://IP:9099/static/html/index.html">http://IP:9099/static/html/index.html</a>,一般是:<a class="reference external" href="http://localhost:9099/static/html/index.html">http://localhost:9099/static/html/index.html</a></p>
+<li><p class="first">一切就绪后运行RtApplication,访问链接:<a class="reference external" href="http://IP:9099/static/html/index.html">http://IP:9099/static/html/index.html</a>,一般是:<a class="reference external" href="http://localhost:9099/static/html/index.html">http://localhost:9099/static/html/index.html</a></p>
 </li>
 </ul>
 <p><a class="reference external" href="https://github.com/sun0x00/redtorch/">转到github仓库下载</a></p>
@@ -161,10 +165,13 @@
 <ul>
 <li><p class="first">策略如何配置</p>
 <blockquote>
-<p>如果没有对目录进行特殊配置，请寻找ZeusStartegyConfig文件夹，对应的&lt;StrategyClassName&gt;-setting.json文件，配置文件和策略的相关说明请等待文档发布</p>
+<p>请访问 <a class="reference external" href="https://v.youku.com/v_show/id_XMzc1ODY5OTk2NA==.html?spm=a2h3j.8428770.3416059.1">概要视频(注意选择分辨率)</a></p>
 </blockquote>
 </li>
 <li><p class="first">如何运行回测（请等待简要文档发布）</p>
+<blockquote>
+<p>请访问 <a class="reference external" href="https://v.youku.com/v_show/id_XMzc1ODY5OTk2NA==.html?spm=a2h3j.8428770.3416059.1">概要视频(注意选择分辨率)</a></p>
+</blockquote>
 </li>
 <li><p class="first">CTP封装源码在哪里</p>
 <blockquote>
@@ -173,9 +180,10 @@
 </li>
 </ul>
 </div>
-<div class="section" id="id11">
+<div class="section" id="id14">
 <h3>联系作者</h3>
 <p><a class="reference external" href="mailto:sun0x00&#64;gmail.com">sun0x00&#64;gmail.com</a></p>
+<p>QQ:1055532121</p>
 </div>
 <div class="section" id="license">
 <h3>License</h3>
